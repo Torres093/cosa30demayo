@@ -23,24 +23,42 @@
     </header>
     <main class="container">
         <h2>Integrantes Del Equipo</h2>
-
-        <table id="tabla" class="overflow-auto striped">
-            <thead>
-                <tr><!--tr de table row-->
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Correo</th>
-                    <th>Acciones</th><!--Para botones de Eliminar y Editar-->
-                </tr>
-            </thead>
-
-            <tbody>
-
-                <!--Aquí vienen los registros del JSON-->
-            </tbody>
-        </table>
+            <div class="tabla-scroll">
+                <table id="tabla" class="overflow-auto striped">
+                    <thead>
+                        <tr><!--tr de table row-->
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Correo</th>
+                            <th>Acciones</th><!--Para botones de Eliminar y Editar-->
+                        </tr>
+                    </thead>
+        
+                    <tbody>
+        
+                        <!--Aquí vienen los registros del JSON-->
+                    </tbody>
+                </table>
+            </div>
+        
     </main>
+<!--Popup para los registros-->
+<dialog id="mdAgregar">
+    <article>
+        <HEAder>
+            <a href="#" class="close" id="btnCerrarModal"></a>
+            <h3>Agregar Integrantes</h3>
+        </HEAder>
+        <form id="frmAgregar">
+            <input type="text" id="txtNombre" placeholder="Name" required>
+            <input type="text" id="txtApellido" placeholder="Last Name" required>
+            <input type="text" id="txtCorreo" placeholder="email" required>
+
+            <button type="submit" class="contrast">Guardar Registro</button>
+        </form>
+    </article>
+</dialog>
 
     <button class="add-button" id="btnAgregar" title="Agregar Integrantes">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-plus-icon lucide-user-plus"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
