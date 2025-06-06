@@ -31,7 +31,7 @@ function MostrarRegistro(datos){
                 <td>${persona.correo}</td>
                 <td>
                     <button>Editar</button>
-                    <button>Eliminar</button>
+                    <button onclick="EliminarPersona(${persona.id})">Eliminar</button>
                 </td>
             </tr>
         `; 
@@ -56,7 +56,62 @@ btnCerrar.addEventListener("click", ()=>{
     modal.close(); 
 }); 
 
+//Agregar un nuevo integrante desde el formulario
+const frmAgregar = document.getElementById("frmAgregar")
 
+
+frmAgregar.addEventListener("submit", async e => {
+    e.preventDefault();
+
+
+    const nombre = document.getElementById("txtNombre").value.trim();
+    const apellido = document.getElementById("txtApellido").value.trim();
+    const correo = document.getElementById("txtCorreo").value.trim();
+
+
+    if(!nombre || !apellido || !correo){
+        alert("Complete todo los campos requeridos")
+        return;
+    }
+
+
+    const respuesta = await fetch(API_URL, {
+        method: "POST",
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            nombre,
+            apellido,
+            correo
+        })
+    });
+   
+    if(respuesta.ok){
+        alert("El registro fue agregado correctamente");
+        document.getElementById("frmAgregar").reset();
+        modal.close();
+    }
+   
+    ObtenerRegistros();
+
+
+});
+
+
+//Funcion para borrar registros
+
+async function EliminarPersona(id){
+    const confirmacion = confirm("¿Quieres eliminar este registro?"); 
+
+    //Validamos si el user eligió aceptar
+    if(confirmacion){
+        await fetch(`${API_URL}/${id}`, {
+            method : "DELETE"
+        }); //Llamada al endpoint 
+        //Recargar la tabla para actualizar la vista
+
+        ObtenerRegistros(); 
+    }
+}
 
 
 
