@@ -134,6 +134,36 @@ function AbrirModalEditar(id, nombre, apellido, correo){
 
 }
 
+document.getElementById("frmEditar").addEventListener("submit", async e => {
+    e.preventDefault(); //evita que el form se envíe de golpe
+
+    const id = document.getElementById("txtIdEditar").value; 
+    const nombre = document.getElementById("txtNombreEditar").value.trim();
+    const apellido = document.getElementById("txtApellidoEditar").value.trim();
+    const correo = document.getElementById("txtCorreoEditar").value.trim();
+   
+    //VAlidacion
+    if(!id || !nombre || !apellido || !correo){
+        alert("Complete todos los campos"); 
+        return; 
+    } 
+
+    //Llamada de la API 
+    const respuesta = await fetch(`${API_URL}/${id}`, {
+        method: "PUT", 
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({id, correo, nombre, apellido})
+    }); 
+
+    if(respuesta.ok){
+        alert("Registro Actualizado")
+        modalEditar.close(); 
+        ObtenerRegistros(); 
+    }
+    else{
+        alert("Hubo un error al actualizar")
+    }
+}); 
 
 
 
